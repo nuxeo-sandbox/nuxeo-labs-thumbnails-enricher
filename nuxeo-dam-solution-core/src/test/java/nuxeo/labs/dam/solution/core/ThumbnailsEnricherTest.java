@@ -22,19 +22,19 @@ import org.nuxeo.runtime.test.runner.FeaturesRunner;
 @Deploy({"nuxeo.labs.dam.solution.core.nuxeo-dam-solution-core"})
 public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<DocumentModelJsonWriter, DocumentModel> {
 
-    public ThumbnailsEnricherTest() {
-        super(DocumentModelJsonWriter.class, DocumentModel.class);
-    }
+  public ThumbnailsEnricherTest() {
+    super(DocumentModelJsonWriter.class, DocumentModel.class);
+  }
 
-    @Inject
-    private CoreSession session;
+  @Inject
+  private CoreSession session;
 
-    @Test
-    public void test() throws Exception {
-        DocumentModel obj = session.getDocument(new PathRef("/"));
-        JsonAssert json = jsonAssert(obj, CtxBuilder.enrich("document", ThumbnailsEnricher.NAME).get());
-        json = json.has("contextParameters").isObject();
-        json.properties(1);
-        json.has(ThumbnailsEnricher.NAME).isObject();
-    }
+  @Test
+  public void test() throws Exception {
+    DocumentModel obj = session.getDocument(new PathRef("/"));
+    JsonAssert json = jsonAssert(obj, CtxBuilder.enrich("document", ThumbnailsEnricher.NAME).get());
+    json = json.has("contextParameters").isObject();
+    json.properties(1);
+    json.has(ThumbnailsEnricher.NAME).isObject();
+  }
 }
