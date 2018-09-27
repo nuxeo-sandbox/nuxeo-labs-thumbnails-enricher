@@ -30,21 +30,21 @@ import org.nuxeo.ecm.core.io.registry.reflect.Setup;
 @Setup(mode = SINGLETON, priority = REFERENCE)
 public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
 
-    public static final String NAME = "thumbnails";
+  public static final String NAME = "thumbnails";
 
-    public ThumbnailsEnricher() {
-        super(NAME);
-    }
+  public ThumbnailsEnricher() {
+    super(NAME);
+  }
 
-    @Override
-    public void write(JsonGenerator jg, DocumentModel obj) throws IOException {
-        // How to instanciate a Session if `obj` is a DocumentModel
-        //try (SessionWrapper wrapper = ctx.getSession(obj)) {
-        //    CoreSession session = wrapper.getSession();
-        //    ...
-        //}
+  @Override
+  public void write(JsonGenerator jg, DocumentModel obj) throws IOException {
+    // How to instanciate a Session if `obj` is a DocumentModel
+    //try (SessionWrapper wrapper = ctx.getSession(obj)) {
+    //    CoreSession session = wrapper.getSession();
+    //    ...
+    //}
 
-        jg.writeFieldName(NAME);
-        jg.writeObject(Collections.EMPTY_MAP);
-    }
+    jg.writeFieldName(NAME);
+    jg.writeObject(Collections.EMPTY_MAP);
+  }
 }
