@@ -80,6 +80,11 @@
         <artifactId>nuxeo-dam-solution-core</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>nuxeo-studio</groupId>
+        <artifactId>dam-solution-nuxeo</artifactId>
+        <version>0.0.0-SNAPSHOT</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>
