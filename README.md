@@ -1,6 +1,6 @@
 # About
 
-This Nuxeo Package contains various features for the `dam-solution` demo.
+This Nuxeo Package contains various features for the `dam-solution-nuxeo` Studio project.
 
 # Usage
 
