@@ -1,0 +1,9 @@
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Manifest-Version: 1.0
+Bundle-Vendor: nuxeo.labs.dam.solution.core
+Bundle-Version: 1.0.0
+Bundle-Name: nuxeo-dam-solution-core
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: nuxeo.labs.dam.solution.core.nuxeo-dam-solution-core;singleton=true
+Nuxeo-Component: OSGI-INF/thumbnails-enricher-contrib.xml
