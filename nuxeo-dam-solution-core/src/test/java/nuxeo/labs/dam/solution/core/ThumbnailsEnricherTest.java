@@ -2,6 +2,7 @@ package nuxeo.labs.dam.solution.core;
 
 import javax.inject.Inject;
 
+import nuxeo.labs.dam.solution.core.enricher.ThumbnailsEnricher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nuxeo.ecm.core.api.CoreSession;
