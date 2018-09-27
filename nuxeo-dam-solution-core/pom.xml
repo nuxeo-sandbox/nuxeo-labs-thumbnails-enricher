@@ -25,5 +25,9 @@
       <artifactId>nuxeo-platform-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>nuxeo-studio</groupId>
+      <artifactId>dam-solution-nuxeo</artifactId>
+    </dependency>
   </dependencies>
 </project>
