@@ -2,6 +2,7 @@ package nuxeo.labs.dam.solution.core.enricher;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.DocumentRef;
 import org.nuxeo.ecm.core.io.marshallers.json.enrichers.AbstractJsonEnricher;
 import org.nuxeo.ecm.core.io.registry.reflect.Setup;
 
@@ -37,7 +38,7 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
   }
 
   @Override
-  public void write(JsonGenerator jg, DocumentModel obj) throws IOException {
+  public void write(JsonGenerator jg, DocumentModel theDeliverable) throws IOException {
 
     /* Here's the old Automation Script:
 
@@ -61,12 +62,14 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
     }
     */
 
-    // How to instanciate a Session if `obj` is a DocumentModel
-    //try (SessionWrapper wrapper = ctx.getSession(obj)) {
+    // How to instanciate a Session if `theDeliverable` is a DocumentModel
+    //try (SessionWrapper wrapper = ctx.getSession(theDeliverable)) {
     //    CoreSession session = wrapper.getSession();
     //    ...
     //}
 
+    // Get children that have a useful thumbnail? Or just all children, at least to start.
+    DocumentRef deliverableRef = theDeliverable.getRef();
     jg.writeFieldName(NAME);
     jg.writeObject(Collections.EMPTY_MAP);
   }
