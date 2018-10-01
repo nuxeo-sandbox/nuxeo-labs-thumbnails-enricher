@@ -60,17 +60,13 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
     session.createDocument(theFolder);
 
     // Create two Picture documents inside the Folder
-    DocumentModel pic1 = session.createDocumentModel(theFolder.getPathAsString(), "pic1", "Picture");
-    File file1 = new File(getClass().getResource("/files/jpg.jpg").getPath());
-    Blob blob1 = new FileBlob(file1);
-    pic1.setPropertyValue("file:content", (Serializable) blob1);
-    session.createDocument(pic1);
+    DocumentModel note1 = session.createDocumentModel(theFolder.getPathAsString(), "note1", "Note");
+    note1.setPropertyValue("dc:title", "note1");
+    session.createDocument(note1);
 
-    DocumentModel pic2 = session.createDocumentModel(theFolder.getPathAsString(), "pic2", "Picture");
-    File file2 = new File(getClass().getResource("/files/png.png").getPath());
-    Blob blob2 = new FileBlob(file2);
-    pic2.setPropertyValue("file:content", (Serializable) blob2);
-    session.createDocument(pic2);
+    DocumentModel note2 = session.createDocumentModel(theFolder.getPathAsString(), "note2", "Note");
+    note1.setPropertyValue("dc:title", "note2");
+    session.createDocument(note2);
 
     // How do we wait until the thumbnail is created? Or is it synchronous?
 
