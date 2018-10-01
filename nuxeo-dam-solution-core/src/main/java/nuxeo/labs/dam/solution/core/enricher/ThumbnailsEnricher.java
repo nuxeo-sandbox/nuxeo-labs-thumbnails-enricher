@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static org.nuxeo.ecm.core.io.registry.reflect.Instantiations.SINGLETON;
 import static org.nuxeo.ecm.core.io.registry.reflect.Priorities.REFERENCE;
+import static org.nuxeo.ecm.core.schema.FacetNames.FOLDERISH;
 
 /**
  * Enrich {@link nuxeo.ecm.core.api.DocumentModel} Json.
@@ -36,7 +37,7 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
   }
 
   @Override
-  public void write(JsonGenerator jg, DocumentModel theDeliverable) throws IOException {
+  public void write(JsonGenerator jg, DocumentModel theFolderish) throws IOException {
 
     /* Here's the old Automation Script:
 
@@ -59,15 +60,18 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
       Document.Save(deliverable, {});
     }
     */
+    if (theFolderish.hasFacet(FOLDERISH)) {
 
-    // Get children that have a useful thumbnail? Or just all children, at least to start.
+      // Get children that have a useful thumbnail? Or just all children, at least to start
+      // Use CtxBuilder.enrich("document", "thumbnail") on each child
 
-    jg.writeFieldName(NAME);
-    jg.writeStartArray();
-    jg.writeStartObject();
-    jg.writeStringField("name", (String) theDeliverable.getPropertyValue("dc:title"));
-    jg.writeStringField("thumbnailUrl", "http://foo.com/bar");
-    jg.writeEndObject();
-    jg.writeEndArray();
+      jg.writeFieldName(NAME);
+      jg.writeStartArray();
+      jg.writeStartObject();
+      jg.writeStringField("name", (String) theFolderish.getPropertyValue("dc:title"));
+      jg.writeStringField("thumbnailUrl", "http://foo.com/bar");
+      jg.writeEndObject();
+      jg.writeEndArray();
+    }
   }
 }
