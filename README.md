@@ -4,7 +4,7 @@ This Nuxeo Package contains various features for the `dam-solution-nuxeo` Studio
 
 # Usage
 
-* A new [Enricher](https://doc.nuxeo.com/n/M8o) `thumbnails` for Deliverable document types to get the thumbnails of the children.
+* A new [Enricher](https://doc.nuxeo.com/n/M8o) `thumbnails` for Folderish document types to get the thumbnails of the children.
 
 # Build
 

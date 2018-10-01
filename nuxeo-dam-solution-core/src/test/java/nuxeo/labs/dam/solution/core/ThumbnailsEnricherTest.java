@@ -58,19 +58,18 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
       }
      */
 
-    // Create a Deliverable
-    DocumentModel theDeliverable = session.createDocumentModel(session.getRootDocument().getPathAsString(), "theDeliverable", "Deliverable");
-    theDeliverable.setPropertyValue("deliverable:assignee", "Administrator");
-    session.createDocument(theDeliverable);
+    // Create a Folder
+    DocumentModel theFolder = session.createDocumentModel(session.getRootDocument().getPathAsString(), "theFolder", "Folder");
+    session.createDocument(theFolder);
 
-    // Create two Picture documents inside the Deliverable
-    DocumentModel pic1 = session.createDocumentModel(theDeliverable.getPathAsString(), "pic1", "Picture");
+    // Create two Picture documents inside the Folder
+    DocumentModel pic1 = session.createDocumentModel(theFolder.getPathAsString(), "pic1", "Picture");
     File file1 = new File(getClass().getResource("/files/jpg.jpg").getPath());
     Blob blob1 = new FileBlob(file1);
     pic1.setPropertyValue("file:content", (Serializable) blob1);
     session.createDocument(pic1);
 
-    DocumentModel pic2 = session.createDocumentModel(theDeliverable.getPathAsString(), "pic2", "Picture");
+    DocumentModel pic2 = session.createDocumentModel(theFolder.getPathAsString(), "pic2", "Picture");
     File file2 = new File(getClass().getResource("/files/png.png").getPath());
     Blob blob2 = new FileBlob(file2);
     pic2.setPropertyValue("file:content", (Serializable) blob2);
@@ -79,7 +78,7 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
     // How do we wait until the thumbnail is created? Or is it synchronous?
 
     // Test the enricher
-    JsonAssert json = jsonAssert(theDeliverable, CtxBuilder.enrich("document", ThumbnailsEnricher.NAME).get());
+    JsonAssert json = jsonAssert(theFolder, CtxBuilder.enrich("document", ThumbnailsEnricher.NAME).get());
     json = json.has("contextParameters").isObject();
     // Should be an array of two thumbnail objects returned by the enricher.
     json.has(ThumbnailsEnricher.NAME);
