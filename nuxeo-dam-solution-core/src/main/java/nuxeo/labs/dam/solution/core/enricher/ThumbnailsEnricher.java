@@ -2,12 +2,10 @@ package nuxeo.labs.dam.solution.core.enricher;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.DocumentRef;
 import org.nuxeo.ecm.core.io.marshallers.json.enrichers.AbstractJsonEnricher;
 import org.nuxeo.ecm.core.io.registry.reflect.Setup;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import static org.nuxeo.ecm.core.io.registry.reflect.Instantiations.SINGLETON;
 import static org.nuxeo.ecm.core.io.registry.reflect.Priorities.REFERENCE;
@@ -62,15 +60,14 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
     }
     */
 
-    // How to instanciate a Session if `theDeliverable` is a DocumentModel
-    //try (SessionWrapper wrapper = ctx.getSession(theDeliverable)) {
-    //    CoreSession session = wrapper.getSession();
-    //    ...
-    //}
-
     // Get children that have a useful thumbnail? Or just all children, at least to start.
-    DocumentRef deliverableRef = theDeliverable.getRef();
+
     jg.writeFieldName(NAME);
-    jg.writeObject(Collections.EMPTY_MAP);
+    jg.writeStartArray();
+    jg.writeStartObject();
+    jg.writeStringField("name", (String) theDeliverable.getPropertyValue("dc:title"));
+    jg.writeStringField("thumbnailUrl", "http://foo.com/bar");
+    jg.writeEndObject();
+    jg.writeEndArray();
   }
 }

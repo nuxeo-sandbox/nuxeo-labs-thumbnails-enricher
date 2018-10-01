@@ -81,9 +81,14 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
     // Test the enricher
     JsonAssert json = jsonAssert(theDeliverable, CtxBuilder.enrich("document", ThumbnailsEnricher.NAME).get());
     json = json.has("contextParameters").isObject();
-    // Should be two thumbnail objects returned by the enricher.
-    json.properties(1);
-    json.properties(1).isArray();
-    json.has(ThumbnailsEnricher.NAME).isObject();
+    // Should be an array of two thumbnail objects returned by the enricher.
+    json.has(ThumbnailsEnricher.NAME);
+
+    JsonAssert thumbnails = json.get(ThumbnailsEnricher.NAME);
+    thumbnails.isArray();
+    JsonAssert pic1thumbnail = thumbnails.get(0);
+    pic1thumbnail.has("thumbnailUrl");
+    JsonAssert pic2thumbnail = thumbnails.get(1);
+    pic2thumbnail.has("thumbnailUrl");
   }
 }
