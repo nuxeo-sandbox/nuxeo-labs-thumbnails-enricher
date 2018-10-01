@@ -1,12 +1,10 @@
-package nuxeo.labs.dam.solution.core;
+package nuxeo.labs.thumbnails.enricher;
 
-import nuxeo.labs.dam.solution.core.enricher.ThumbnailsEnricher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nuxeo.ecm.core.api.Blob;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.PathRef;
 import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
 import org.nuxeo.ecm.core.io.marshallers.json.AbstractJsonWriterTest;
 import org.nuxeo.ecm.core.io.marshallers.json.JsonAssert;
@@ -21,8 +19,7 @@ import java.io.Serializable;
 
 @RunWith(FeaturesRunner.class)
 @Features({PlatformFeature.class})
-@Deploy({"nuxeo.labs.dam.solution.core.nuxeo-dam-solution-core"})
-@PartialDeploy(bundle = "studio.extensions.dam-solution-nuxeo", extensions = {TargetExtensions.ContentModel.class})
+@Deploy({"nuxeo.labs.thumbnails.enricher.core.nuxeo-labs-thumbnails-enricher-core"})
 
 public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<DocumentModelJsonWriter, DocumentModel> {
 

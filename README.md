@@ -1,10 +1,6 @@
 # About
 
-This Nuxeo Package contains various features for the `dam-solution-nuxeo` Studio project.
-
-# Usage
-
-* A new [Enricher](https://doc.nuxeo.com/n/M8o) `thumbnails` for Folderish document types to get the thumbnails of the children.
+This Nuxeo Package contains a new [Enricher](https://doc.nuxeo.com/n/M8o) `thumbnails` for Folderish document types to get the thumbnails of the children.
 
 # Build
 
@@ -14,14 +10,14 @@ Building requires the following software:
 * maven
 
 ```
-git clone https://github.com/nuxeo-sandbox/nuxeo-dam-solution
-cd nuxeo-dam-solution
+git clone https://github.com/nuxeo-sandbox/nuxeo-labs-thumbnails-enricher
+cd nuxeo-labs-thumbnails-enricher
 mvn clean install
 ```
 
 ## Install
 
-The build will produce a Nuxeo Pacakage in the folder `nuxeo-dam-solution-package/target`. If you need help installing Nuxeo Packages, refer to [the documentation](https://doc.nuxeo.com/n/lHZ).
+The build will produce a Nuxeo Pacakage in the folder `nuxeo-labs-thumbnails-enricher-package/target`. If you need help installing Nuxeo Packages, refer to [the documentation](https://doc.nuxeo.com/n/lHZ).
 
 # Support
 

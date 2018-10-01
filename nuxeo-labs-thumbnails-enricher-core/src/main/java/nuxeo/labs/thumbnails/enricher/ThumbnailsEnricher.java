@@ -1,4 +1,4 @@
-package nuxeo.labs.dam.solution.core.enricher;
+package nuxeo.labs.thumbnails.enricher;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.nuxeo.ecm.core.api.DocumentModel;

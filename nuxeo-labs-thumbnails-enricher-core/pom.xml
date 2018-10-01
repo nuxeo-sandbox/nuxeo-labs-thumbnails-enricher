@@ -2,13 +2,13 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>nuxeo.labs.dam.solution</groupId>
-    <artifactId>nuxeo-dam-solution-parent</artifactId>
+    <groupId>nuxeo.labs.thumbnails.enricher</groupId>
+    <artifactId>nuxeo-labs-thumbnails-enricher-parent</artifactId>
     <version>9.10-SNAPSHOT</version>
   </parent>
-  <artifactId>nuxeo-dam-solution-core</artifactId>
-  <name>Nuxeo dam solution core</name>
-  <description>Core features for nuxeo-dam-solution plugin</description>
+  <artifactId>nuxeo-labs-thumbnails-enricher-core</artifactId>
+  <name>Nuxeo Labs thumbnails enricher core</name>
+  <description>Core features for nuxeo-labs-thumbnails-enricher plugin</description>
 
   <dependencies>
     <dependency>
@@ -24,10 +24,6 @@
       <groupId>org.nuxeo.ecm.platform</groupId>
       <artifactId>nuxeo-platform-test</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>nuxeo-studio</groupId>
-      <artifactId>dam-solution-nuxeo</artifactId>
     </dependency>
   </dependencies>
 </project>
