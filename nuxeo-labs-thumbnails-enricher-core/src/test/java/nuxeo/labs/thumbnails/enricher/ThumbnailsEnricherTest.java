@@ -9,6 +9,7 @@ import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
 import org.nuxeo.ecm.core.io.marshallers.json.AbstractJsonWriterTest;
 import org.nuxeo.ecm.core.io.marshallers.json.JsonAssert;
 import org.nuxeo.ecm.core.io.marshallers.json.document.DocumentModelJsonWriter;
+import org.nuxeo.ecm.core.io.registry.context.DepthValues;
 import org.nuxeo.ecm.core.io.registry.context.RenderingContext.CtxBuilder;
 import org.nuxeo.ecm.platform.test.PlatformFeature;
 import org.nuxeo.runtime.test.runner.*;
@@ -71,7 +72,7 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
     // How do we wait until the thumbnail is created? Or is it synchronous?
 
     // Test the enricher
-    JsonAssert json = jsonAssert(theFolder, CtxBuilder.enrich("document", ThumbnailsEnricher.NAME).get());
+    JsonAssert json = jsonAssert(theFolder, CtxBuilder.depth(DepthValues.max).enrich("document", ThumbnailsEnricher.NAME).get());
     json = json.has("contextParameters").isObject();
     // Should be an array of two thumbnail objects returned by the enricher.
     json.has(ThumbnailsEnricher.NAME);
