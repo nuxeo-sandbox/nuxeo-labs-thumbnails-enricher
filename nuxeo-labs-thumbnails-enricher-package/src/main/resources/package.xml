@@ -2,7 +2,7 @@
 <package type="addon" name="nuxeo-labs-thumbnails-enricher" version="@VERSION@">
   <title>Nuxeo labs thumbnails enricher</title>
   <description>
-    <p>Put here an HTML description of your Nuxeo Package.</p>
+    <p>A new Enricher named "thumbnails" for Folderish document types to get the thumbnails of the children.</p>
   </description>
   <!-- <home-page>http://doc.nuxeo.com/</home-page> -->
   <vendor>Nuxeo</vendor>
