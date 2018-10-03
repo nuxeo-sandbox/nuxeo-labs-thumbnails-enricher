@@ -59,7 +59,7 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
     DocumentModel theFolder = session.createDocumentModel(session.getRootDocument().getPathAsString(), "theFolder", "Folder");
     session.createDocument(theFolder);
 
-    // Create two Picture documents inside the Folder
+    // Create two documents inside the Folder
     DocumentModel note1 = session.createDocumentModel(theFolder.getPathAsString(), "note1", "Note");
     note1.setPropertyValue("dc:title", "note1");
     session.createDocument(note1);
