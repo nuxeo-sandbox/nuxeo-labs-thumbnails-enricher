@@ -78,9 +78,9 @@ public class ThumbnailsEnricherTest extends AbstractJsonWriterTest.Local<Documen
 
     JsonAssert thumbnails = json.get(ThumbnailsEnricher.NAME);
     thumbnails.isArray();
-    JsonAssert pic1thumbnail = thumbnails.get(0);
-    pic1thumbnail.has("thumbnailUrl");
-    JsonAssert pic2thumbnail = thumbnails.get(1);
-    pic2thumbnail.has("thumbnailUrl");
+    JsonAssert child1thumbnail = thumbnails.get(0);
+    child1thumbnail.has("thumbnailUrl");
+    JsonAssert child2thumbnail = thumbnails.get(1);
+    child2thumbnail.has("thumbnailUrl");
   }
 }
