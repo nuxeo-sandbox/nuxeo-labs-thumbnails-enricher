@@ -75,7 +75,6 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
         jg.writeEndObject();
       }
 
-
       jg.writeEndArray();
     }
   }
