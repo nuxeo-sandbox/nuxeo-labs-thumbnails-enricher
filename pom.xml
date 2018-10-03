@@ -16,6 +16,7 @@
 
   <modules>
     <module>nuxeo-labs-thumbnails-enricher-core</module>
+    <module>nuxeo-labs-thumbnails-enricher-package</module>
   </modules>
   <scm/>
   <licenses/>
@@ -67,6 +68,11 @@
       <dependency>
         <groupId>nuxeo.labs.thumbnails.enricher</groupId>
         <artifactId>nuxeo-labs-thumbnails-enricher-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nuxeo.labs.thumbnails.enricher</groupId>
+        <artifactId>nuxeo-labs-thumbnails-enricher-package</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
