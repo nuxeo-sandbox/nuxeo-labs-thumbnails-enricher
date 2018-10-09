@@ -44,6 +44,13 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
 
   public static final String THUMBNAIL_URL_PATTERN = "%s/api/v1/repo/%s/id/%s/@rendition/thumbnail";
 
+  public static final String THUMBNAIL_HEADER_LIMIT = "thumbnail-limit";
+
+  public static final String THUMBNAIL_HEADER_TYPES = "thumbnail-types";
+
+  public static final String THUMBNAIL_HEADER_FACETS = "thumbnail-facets";
+
+
   public ThumbnailsEnricher() {
     super(NAME);
   }
@@ -56,14 +63,19 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
       CoreSession session = theFolderish.getCoreSession();
 
       // Get children that have a useful thumbnail? Or just all children, at least to start
-      // TODO: query for children so we can support filters
+      // TODO: filter children by type
+      // TODO: filter children by facet
       String theQuery = "SELECT * FROM Document WHERE ecm:parentId = '" + theFolderish.getId() + "'";
       DocumentModelList theChildren = session.query(theQuery,3);
+
+      String thumbnailLimit = ctx.getParameter(THUMBNAIL_HEADER_LIMIT);
+
+      long loopLimit = theChildren.totalSize() > Long.parseLong(thumbnailLimit) ? theChildren.totalSize() : Long.parseLong(thumbnailLimit);
 
       jg.writeFieldName(NAME);
       jg.writeStartArray();
 
-      for (int i = 0; i < theChildren.totalSize(); i++) {
+      for (int i = 0; i < loopLimit; i++) {
 
         DocumentModel currentChild = theChildren.get(i);
 
