@@ -56,6 +56,7 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
       CoreSession session = theFolderish.getCoreSession();
 
       // Get children that have a useful thumbnail? Or just all children, at least to start
+      // TODO: query for children so we can support filters
       DocumentModelList theChildren = session.getChildren(theFolderish.getRef());
 
       jg.writeFieldName(NAME);
