@@ -1,7 +1,7 @@
 package nuxeo.labs.thumbnails.enricher;
 
 import org.codehaus.jackson.JsonGenerator;
-import org.h2.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -119,7 +119,7 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
    * Add single quotes to each item in a CSV string.
    */
   private String csvToQuoted(String csv) {
-    List<String> valuesArray = Arrays.asList(StringUtils.arraySplit(csv, ',', true));
+    List<String> valuesArray = Arrays.asList(StringUtils.split(StringUtils.trim(csv), ","));
     String quotedCsv = valuesArray.stream()
         .map(s -> "'" + s + "'")
         .collect(Collectors.joining(","));
