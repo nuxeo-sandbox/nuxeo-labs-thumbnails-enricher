@@ -6,14 +6,18 @@ This Nuxeo Package contains a new [Enricher](https://doc.nuxeo.com/n/M8o) `thumb
 
 # Usage
 
-Format is:
+* You can limit the number of results by setting the header `thumbnail-limit` to a number
+* You can filter the children by type by setting the header `thumbnail-types` to a comma-separated list of types
+* You can filter the children by facet by setting the header `thumbnail-facets` to a comma-separated list of facets
+
+The result format is:
 
 ```
 "contextParameters": {
  "thumbnails": [
    {
-     "id": ...
-     "thumbnailUrl": ...
+     "id": <doc-id>
+     "thumbnailUrl": <thumbnail-url>
    },
    ...
  ]
