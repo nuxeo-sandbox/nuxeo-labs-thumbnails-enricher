@@ -44,11 +44,11 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
 
   public static final String THUMBNAIL_URL_PATTERN = "%s/api/v1/repo/%s/id/%s/@rendition/thumbnail";
 
-  public static final String THUMBNAIL_HEADER_LIMIT = "thumbnail-limit";
+  public static final String THUMBNAILS_HEADER_LIMIT = "thumbnail-limit";
 
-  public static final String THUMBNAIL_HEADER_TYPES = "thumbnail-types";
+  public static final String THUMBNAILS_HEADER_TYPES = "thumbnail-types";
 
-  public static final String THUMBNAIL_HEADER_FACETS = "thumbnail-facets";
+  public static final String THUMBNAILS_HEADER_FACETS = "thumbnail-facets";
 
 
   public ThumbnailsEnricher() {
@@ -62,20 +62,30 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
 
       CoreSession session = theFolderish.getCoreSession();
 
-      // Get children that have a useful thumbnail? Or just all children, at least to start
+      String thumbnailLimitString = ctx.getParameter(THUMBNAILS_HEADER_LIMIT);
+      String thumbnailTypesString = ctx.getParameter(THUMBNAILS_HEADER_TYPES);
+      String thumbnailFacetsString = ctx.getParameter(THUMBNAILS_HEADER_FACETS);
+
+      int thumbnailLimit;
+      DocumentModelList theChildren;
+      String theQuery = "SELECT * FROM Document WHERE ecm:parentId = '" + theFolderish.getId() + "'";
+
       // TODO: filter children by type
       // TODO: filter children by facet
-      String theQuery = "SELECT * FROM Document WHERE ecm:parentId = '" + theFolderish.getId() + "'";
-      DocumentModelList theChildren = session.query(theQuery,3);
 
-      String thumbnailLimit = ctx.getParameter(THUMBNAIL_HEADER_LIMIT);
+      if (thumbnailLimitString != null) {
+        thumbnailLimit = Integer.parseInt(thumbnailLimitString);
+        theChildren = session.query(theQuery, thumbnailLimit);
+      } else {
+        theChildren = session.query(theQuery);
+      }
 
-      long loopLimit = theChildren.totalSize() > Long.parseLong(thumbnailLimit) ? theChildren.totalSize() : Long.parseLong(thumbnailLimit);
+      long limit = theChildren.totalSize();
 
       jg.writeFieldName(NAME);
       jg.writeStartArray();
 
-      for (int i = 0; i < loopLimit; i++) {
+      for (int i = 0; i < limit; i++) {
 
         DocumentModel currentChild = theChildren.get(i);
 
