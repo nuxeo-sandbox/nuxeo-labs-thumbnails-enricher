@@ -18,9 +18,7 @@ import org.nuxeo.runtime.transaction.TransactionHelper;
 
 import javax.inject.Inject;
 
-import static nuxeo.labs.thumbnails.enricher.ThumbnailsEnricher.THUMBNAILS_HEADER_FACETS;
-import static nuxeo.labs.thumbnails.enricher.ThumbnailsEnricher.THUMBNAILS_HEADER_LIMIT;
-import static nuxeo.labs.thumbnails.enricher.ThumbnailsEnricher.THUMBNAILS_HEADER_TYPES;
+import static nuxeo.labs.thumbnails.enricher.ThumbnailsEnricher.*;
 
 @RunWith(FeaturesRunner.class)
 @Features({PlatformFeature.class})

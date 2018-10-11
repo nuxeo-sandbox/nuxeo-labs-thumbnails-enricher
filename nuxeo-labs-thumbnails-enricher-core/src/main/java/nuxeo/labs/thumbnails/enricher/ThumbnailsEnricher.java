@@ -1,6 +1,7 @@
 package nuxeo.labs.thumbnails.enricher;
 
 import org.codehaus.jackson.JsonGenerator;
+import org.h2.util.StringUtils;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
@@ -8,6 +9,9 @@ import org.nuxeo.ecm.core.io.marshallers.json.enrichers.AbstractJsonEnricher;
 import org.nuxeo.ecm.core.io.registry.reflect.Setup;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.nuxeo.ecm.core.io.registry.reflect.Instantiations.SINGLETON;
 import static org.nuxeo.ecm.core.io.registry.reflect.Priorities.REFERENCE;
@@ -38,18 +42,20 @@ import static org.nuxeo.ecm.core.schema.FacetNames.FOLDERISH;
 @Setup(mode = SINGLETON, priority = REFERENCE)
 public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
 
+  // This is the name of the enricher
   public static final String NAME = "thumbnails";
 
+  // These values are used in the returned JSON as keys
   public static final String THUMBNAIL_URL_LABEL = "thumbnailUrl";
+  public static final String THUMBNAIL_ID_LABEL = "id";
 
-  public static final String THUMBNAIL_URL_PATTERN = "%s/api/v1/repo/%s/id/%s/@rendition/thumbnail";
-
+  // These optional values can be passed as HTTP headers
   public static final String THUMBNAILS_HEADER_LIMIT = "thumbnail-limit";
-
   public static final String THUMBNAILS_HEADER_TYPES = "thumbnail-types";
-
   public static final String THUMBNAILS_HEADER_FACETS = "thumbnail-facets";
 
+  // This is copied from org.nuxeo.ecm.platform.thumbnail.io.ThumbnailJsonEnricher.java
+  private static final String THUMBNAIL_URL_PATTERN = "%s/api/v1/repo/%s/id/%s/@rendition/thumbnail";
 
   public ThumbnailsEnricher() {
     super(NAME);
@@ -66,22 +72,28 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
       String thumbnailTypesString = ctx.getParameter(THUMBNAILS_HEADER_TYPES);
       String thumbnailFacetsString = ctx.getParameter(THUMBNAILS_HEADER_FACETS);
 
-      int thumbnailLimit;
-      DocumentModelList theChildren;
       String theQuery = "SELECT * FROM Document WHERE ecm:parentId = '" + theFolderish.getId() + "'";
 
-      // TODO: filter children by type
-      // TODO: filter children by facet
+      // Filter children by type
+      if (thumbnailTypesString != null) {
+        theQuery = theQuery + " AND ecm:primaryType IN (" + csvToQuoted(thumbnailTypesString) + ")";
+      }
 
+      // Filter children by facet
+      if (thumbnailFacetsString != null) {
+        theQuery = theQuery + " AND ecm:mixinType IN (" + csvToQuoted(thumbnailFacetsString) + ")";
+      }
+
+      DocumentModelList theChildren;
       if (thumbnailLimitString != null) {
-        thumbnailLimit = Integer.parseInt(thumbnailLimitString);
-        theChildren = session.query(theQuery, thumbnailLimit);
+        theChildren = session.query(theQuery, Integer.parseInt(thumbnailLimitString));
       } else {
         theChildren = session.query(theQuery);
       }
 
       long limit = theChildren.totalSize();
 
+      // Write JSON response.
       jg.writeFieldName(NAME);
       jg.writeStartArray();
 
@@ -90,7 +102,7 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
         DocumentModel currentChild = theChildren.get(i);
 
         jg.writeStartObject();
-        jg.writeStringField("id", (String) currentChild.getId());
+        jg.writeStringField(THUMBNAIL_ID_LABEL, (String) currentChild.getId());
         // This is copied from org.nuxeo.ecm.platform.thumbnail.io.ThumbnailJsonEnricher.java because can't figure out
         // how to use an existing enricher from Java.
         jg.writeStringField(THUMBNAIL_URL_LABEL,
@@ -101,5 +113,16 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
 
       jg.writeEndArray();
     }
+  }
+
+  /**
+   * Add single quotes to each item in a CSV string.
+   */
+  private String csvToQuoted(String csv) {
+    List<String> valuesArray = Arrays.asList(StringUtils.arraySplit(csv, ',', true));
+    String quotedCsv = valuesArray.stream()
+        .map(s -> "'" + s + "'")
+        .collect(Collectors.joining(","));
+    return quotedCsv;
   }
 }
