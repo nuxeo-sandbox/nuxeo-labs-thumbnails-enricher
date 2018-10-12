@@ -1,6 +1,6 @@
 # About
 
-[![Build Status](https://qa.nuxeo.org/jenkins/buildStatus/icon?job=Sandbox/sandbox_nuxeo-labs-thumbnails-enricher)](https://qa.nuxeo.org/jenkins/job/Sandbox/job/sandbox_nuxeo-labs-thumbnails-enricher/)
+[![Build Status](https://qa.nuxeo.org/jenkins/buildStatus/icon?job=Sandbox/sandbox_nuxeo-labs-thumbnails-enricher-master)](https://qa.nuxeo.org/jenkins/job/Sandbox/job/sandbox_nuxeo-labs-thumbnails-enricher-master/)
 
 This Nuxeo Package contains a new [Enricher](https://doc.nuxeo.com/n/M8o) `thumbnails` for Folderish document types to get the thumbnails of the children.
 
