@@ -13,7 +13,7 @@ This Nuxeo Package contains a new [Enricher](https://doc.nuxeo.com/n/M8o) named 
 * You can filter the children by type by setting the header `thumbnail-types` to a comma-separated list of types
 * You can filter the children by facet by setting the header `thumbnail-facets` to a comma-separated list of facets
 
-The result format is:
+The result format is:
 
 ```
 "contextParameters": {
