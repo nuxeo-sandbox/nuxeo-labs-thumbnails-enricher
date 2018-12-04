@@ -1,6 +1,6 @@
 package nuxeo.labs.thumbnails.enricher;
 
-import org.codehaus.jackson.JsonGenerator;
+import com.fasterxml.jackson.core.JsonGenerator;
 import org.apache.commons.lang3.StringUtils;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -61,8 +61,11 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
     super(NAME);
   }
 
+
   @Override
-  public void write(JsonGenerator jg, DocumentModel theFolderish) throws IOException {
+  public void write(JsonGenerator jg,
+                    DocumentModel theFolderish) throws IOException {
+
 
     if (theFolderish.hasFacet(FOLDERISH)) {
 
@@ -125,4 +128,5 @@ public class ThumbnailsEnricher extends AbstractJsonEnricher<DocumentModel> {
         .collect(Collectors.joining(","));
     return quotedCsv;
   }
+
 }

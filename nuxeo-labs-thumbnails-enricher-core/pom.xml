@@ -4,7 +4,7 @@
   <parent>
     <groupId>nuxeo.labs.thumbnails.enricher</groupId>
     <artifactId>nuxeo-labs-thumbnails-enricher-parent</artifactId>
-    <version>9.10-SNAPSHOT</version>
+    <version>10.10-SNAPSHOT</version>
   </parent>
   <artifactId>nuxeo-labs-thumbnails-enricher-core</artifactId>
   <name>Nuxeo Labs thumbnails enricher core</name>
