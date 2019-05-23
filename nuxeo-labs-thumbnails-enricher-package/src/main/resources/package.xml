@@ -1,8 +1,7 @@
-<!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
 <package type="addon" name="nuxeo-labs-thumbnails-enricher" version="@VERSION@">
-  <title>Nuxeo labs thumbnails enricher</title>
+  <title>Nuxeo Folder Content Thumbnail API Enricher</title>
   <description>
-    <p>A new Enricher named "thumbnails" for Folderish document types to get the thumbnails of the children.</p>
+    <p>An Enricher named "thumbnails" for Folderish document types to get the thumbnails of the children.</p>
   </description>
   <!-- <home-page>http://doc.nuxeo.com/</home-page> -->
   <vendor>Nuxeo</vendor>
@@ -14,7 +13,6 @@
   <nuxeo-validation>none</nuxeo-validation>
   <!-- Production State: production_ready | testing | proto -->
   <production-state>testing</production-state>
-  <supported>false</supported>
   <platforms>
     <platform>server-@DISTRIB_VERSION@</platform>
     <platform>server-@DISTRIB_VERSION@-HF*</platform>
@@ -38,5 +36,5 @@
   <license>Apache License, Version 2.0</license>
   <license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
   <!-- Visibility: PRIVATE | MARKETPLACE | DEV | PUBLIC -->
-  <visibility>DEV</visibility>
+  <visibility>PUBLIC</visibility>
 </package>
